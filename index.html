@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS5 UI Effect</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1); /* Start with semi-transparent */
+    animation: moveCircle 10s linear infinite alternate, changeOpacity 5s infinite alternate;
+  }
+
+  @keyframes moveCircle {
+    0% {
+      transform: translateY(0) scale(0.2);
+    }
+    100% {
+      transform: translateY(100vh) scale(2);
+    }
+  }
+
+  @keyframes changeOpacity {
+    0% {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      background-color: rgba(255, 255, 255, 0.5); /* Transition to semi-opaque */
+    }
+    100% {
+      background-color: rgba(255, 255, 255, 0.1); /* Transition back to semi-transparent */
+    }
+  }
+</style>
+</head>
+<body>
+<script>
+  const numCircles = 200; // Adjust the number of circles
+  const centerX = window.innerWidth / 2;
+
+  for (let i = 0; i < numCircles; i++) {
+    createCircle();
+  }
+
+  function createCircle() {
+    const circle = document.createElement('div');
+    circle.classList.add('circle');
+    circle.style.top = `${Math.random() * window.innerHeight}px`;
+    circle.style.left = `${randomInRange(centerX - 200, centerX + 200)}px`; // Adjust the range of horizontal distribution
+    circle.style.width = `${Math.random() * 100 + 20}px`; // Randomize width
+    circle.style.height = circle.style.width; // Make height same as width for perfect circle
+    document.body.appendChild(circle);
+  }
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+</script>
+</body>
+</html>
